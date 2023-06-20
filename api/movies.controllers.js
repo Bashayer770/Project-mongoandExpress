@@ -37,7 +37,6 @@ exports.moviesUpdate = async (req, res, next) => {
 
 exports.moviesRatings = async (req, res, next) => {
   try {
-    console.log("Hello ", req.body.ratings);
     if (req.body.ratings >= 0 && req.body.ratings <= 10) {
       await Movie.updateOne({
         $push: { ratings: [req.body.ratings] },
