@@ -19,7 +19,7 @@ exports.moviesCreate = async (req, res, next) => {
 
 exports.moviesDelete = async (req, res, next) => {
   try {
-    await req.Movie.deleteOne(req.body);
+    await req.movie.deleteOne(req.body);
     return res.status(204).end();
   } catch (error) {
     return next(error);
@@ -28,7 +28,7 @@ exports.moviesDelete = async (req, res, next) => {
 
 exports.moviesUpdate = async (req, res, next) => {
   try {
-    await req.Movie.updateOne(req.body);
+    await req.movie.updateOne(req.body);
     return res.status(204).end();
   } catch (error) {
     return next(error);
