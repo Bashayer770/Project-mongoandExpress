@@ -40,16 +40,15 @@ exports.moviesRatings = async (req, res, next) => {
     if (req.body.ratings > 0 && req.body.ratings <= 10) {
       const updatedRatings = await Movie.updateOne(req.movie, {
         $push: { ratings: [...req.movie.ratings, req.body.ratings] },
-    });
-    return res.status(updatedRatings).end();
+      });
+      return res.status(updatedRatings).end();
     }
-    }
-
   } catch (error) {
     return next(error);
     // await req.movie.updateOne(req.body);
   }
 };
+
 exports.moviesGet = async (req, res, next) => {
   try {
     const movies = await Movie.find();
