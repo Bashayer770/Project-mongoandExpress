@@ -1,9 +1,23 @@
 const express = require("express");
+const app = express();
 const dotenv = require("dotenv");
-const PORT = 8000;
+const movieRoutes = require("./api/movies.Routes");
+const connectDB = require("./mongoDB/database");
+const morgan = require("morgan");
+const errorHandler = require("./middleWare/errorHandler");
+const notFoundHandler = require("./middleWare/notFound");
+const path = require("path");
+connectDB();
+
 dotenv.config();
 
-const app = express();
+app.use("/media/", express.static(path.join(__dirname, "media")));
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json());
+app.use("/movies", movieRoutes);
+app.use(errorHandler);
+app.use(notFoundHandler);
 
 app.listen(process.env.PORT, () => {
   console.log(`The application is running on ${process.env.PORT}`);
