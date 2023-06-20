@@ -6,6 +6,7 @@ const MovieSchema = new Schema(
     genre: { type: String, require: true },
     dateRelease: { type: Number, require: true },
     image: { type: String, require: true },
+    ratings: [Number],
   },
   { Timestamps: true }
 );
