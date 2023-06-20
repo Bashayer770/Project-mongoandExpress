@@ -4,9 +4,11 @@ const dotenv = require("dotenv");
 const movieRoutes = require("./api/movies.Routes");
 const connectDB = require("./mongoDB/database");
 const morgan = require("morgan");
+const cors = require("cors");
 const errorHandler = require("./middleWare/errorHandler");
 const notFoundHandler = require("./middleWare/notFound");
 const path = require("path");
+
 connectDB();
 
 dotenv.config();
