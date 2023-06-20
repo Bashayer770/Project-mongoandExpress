@@ -13,11 +13,13 @@ connectDB();
 
 dotenv.config();
 
-app.use("/media/", express.static(path.join(__dirname, "media")));
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+
+app.use("/media/", express.static(path.join(__dirname, "media")));
 app.use("/movies", movieRoutes);
+
 app.use(errorHandler);
 app.use(notFoundHandler);
 

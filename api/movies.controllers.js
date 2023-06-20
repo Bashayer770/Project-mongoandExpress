@@ -1,7 +1,7 @@
 const Movie = require("../mongoDB/models/movie");
 
 exports.fetchMovie = async (movieId) => {
-  const foundMovie = await Post.findById(movieId);
+  const foundMovie = await Movie.findById(movieId);
   return foundMovie;
 };
 
@@ -37,11 +37,16 @@ exports.moviesUpdate = async (req, res, next) => {
 
 exports.moviesRatings = async (req, res, next) => {
   try {
-    if (req.body.ratings > 0 && req.body.ratings <= 10) {
-      const updatedRatings = await Movie.updateOne(req.movie, {
-        $push: { ratings: [...req.movie.ratings, req.body.ratings] },
+    console.log("Hello ", req.body.ratings);
+    if (req.body.ratings >= 0 && req.body.ratings <= 10) {
+      await Movie.updateOne({
+        $push: { ratings: [req.body.ratings] },
       });
-      return res.status(updatedRatings).end();
+      return res.status(204).end();
+    } else {
+      return res.status(401).json({
+        msg: "please add a rating between 0 and 10",
+      });
     }
   } catch (error) {
     return next(error);

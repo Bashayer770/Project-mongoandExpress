@@ -8,11 +8,13 @@ const {
   moviesDelete,
   moviesGet,
   moviesUpdate,
+  moviesRatings,
   fetchMovie,
 } = require("../api/movies.controllers");
 
 router.param("movieId", async (req, res, next, movieId) => {
   try {
+    console.log("I am working");
     const foundMovie = await fetchMovie(movieId);
     if (!foundMovie) return next({ status: 404, messege: "Movie not found" });
     req.movie = foundMovie;
@@ -26,5 +28,6 @@ router.get("/", moviesGet);
 router.post("/", uploader.single("image"), moviesCreate);
 router.delete("/:movieId", moviesDelete);
 router.put("/:movieId", moviesUpdate);
+router.put("/:movieId/rate", moviesRatings);
 
 module.exports = router;
